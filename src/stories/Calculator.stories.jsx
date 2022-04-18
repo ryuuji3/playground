@@ -12,21 +12,39 @@ function Template(args) {
 
 export const Simple = Template.bind({})
 Simple.args = {
-    rows: [
+    initialRows: [
         {
-            operand: 'a',
-            label: 'A',
-            initialValue: 1,
+            name: 'a',
+            label: 'Initial value',
+            value: 5,
         },
         {
-            operand: 'b',
-            label: 'B',
+            name: 'b',
+            label: 'Add',
             operator: '+',
-            initialValue: 2,
+            value: 1,
         },
         {
-            operand: 'c',
-            label: 'C',
+            name: 'c',
+            label: 'Multiply',
+            operator: '*',
+            value: 4,
+        },
+        {
+            name: 'd',
+            label: 'Divide',
+            operator: '/',
+            value: 2,
+        },
+        {
+            name: 'e',
+            label: 'Subtract',
+            operator: '-',
+            value: 2,
+        },
+        {
+            name: 'result',
+            label: 'Result',
             operator: '=',
         },
     ],
