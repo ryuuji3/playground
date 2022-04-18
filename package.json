@@ -1,4 +1,5 @@
 {
+  "homepage": "http://ryuuji3.github.io/playground",
   "name": "playground",
   "version": "0.1.0",
   "private": true,
@@ -13,9 +14,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "start-storybook -p 6006 -s public",
+    "start": "start-storybook -p 6006",
     "test": "react-scripts test",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook",
+    "predeploy-storybook": "npm run build-storybook",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "eslintConfig": {
     "extends": [
@@ -56,6 +59,7 @@
     "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.9",
+    "gh-pages": "^3.2.3",
     "webpack": "^5.72.0"
   }
 }
