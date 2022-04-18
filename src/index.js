@@ -1,1 +1,1 @@
-/* TODO: Export something */
+export { default as Calculator } from './calculator'
