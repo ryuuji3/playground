@@ -1,34 +1,54 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import OPERATORS from './definitions/Operators'
 
-export default function Calculator() {
+
+export default function Calculator({
+    rows = [],
+}) {
+    const operands = rows.map(row => row.operand)
+    const calculatorRows = rows.map(row => (<Row {...row} key={row.operand} operands={operands} />))
+
     return (
         <Container>
-            <div className="calculator-row">
-                <div className="operand">
-                    <label htmlFor="operand1">A Number</label>
-                    <input name="operand1" type="number" inputMode="decimal" />
-                </div>
-            </div>
-            <div className="calculator-row">
-                <span className="operator">+</span>
-
-                <div className="operand">
-                    <label htmlFor="operand2">Another Number</label>
-                    <input name="operand2" type="number" inputMode="decimal" />
-                </div>
-            </div>
-            <hr />
-            <div className="calculator-row">
-                <span className="operator">=</span>
-
-                <div className="result">
-                    <label htmlFor="result">Result</label>
-                    <output name="result" type="number" htmlFor="operand1 operand2">3</output>
-                </div>
-            </div>
+            {calculatorRows}
         </Container>
+    )
+}
+
+function Row({ operator, ...rowProps }) {
+    return (
+        <>
+            {operator === OPERATORS.EQUALS && <hr/>}
+            <div className="calculator-row">
+                {operator && <span className="operator">{operator}</span>}
+
+                {
+                    operator === OPERATORS.EQUALS
+                        ? <Result {...rowProps} />
+                        : <Operand {...rowProps} />
+                }
+            </div>
+        </>
+    )
+}
+
+function Operand({ label, operand, initialValue }) {
+    return (
+        <div className="operand">
+            <label htmlFor={operand}>{label}</label>
+            <input name={operand} type="number" inputMode="decimal" value={initialValue} />
+        </div>
+    )
+}
+
+function Result({ label, operand, result, operands }) {
+    return (
+        <div className="result">
+            <label htmlFor={operand}>{label}</label>
+            <output name={operand} htmlFor={operands.join(" ")}>{result}</output>
+        </div>
     )
 }
 

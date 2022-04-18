@@ -6,9 +6,28 @@ export default {
     component: Calculator,
 }
 
-function Template() {
-    return <Calculator />
+function Template(args) {
+    return <Calculator {...args} />
 }
 
-export const _Calculator = Template.bind({})
-_Calculator.storyName = "Calculator"
+export const Simple = Template.bind({})
+Simple.args = {
+    rows: [
+        {
+            operand: 'a',
+            label: 'A',
+            initialValue: 1,
+        },
+        {
+            operand: 'b',
+            label: 'B',
+            operator: '+',
+            initialValue: 2,
+        },
+        {
+            operand: 'c',
+            label: 'C',
+            operator: '=',
+        },
+    ],
+}
