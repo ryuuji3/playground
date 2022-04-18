@@ -1,8 +1,8 @@
 import React, { createContext } from 'react'
 import styled from 'styled-components'
 
-import useCalculatorState from './hooks/useCalculatorState'
-import Row from './components/Row'
+import { useCalculatorState } from './hooks'
+import Row from './row'
 
 export const CalculatorContext = createContext()
 

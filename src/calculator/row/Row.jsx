@@ -2,7 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 import OPERATORS from '../definitions/Operators'
-import useCalculator from '../hooks/useCalculator'
+
+import Result from './Result'
+import Operand from './Operand'
+import Operator from './Operator'
 
 
 function Row({ operator, ...rowProps }) {
@@ -10,7 +13,7 @@ function Row({ operator, ...rowProps }) {
         <Container>
             {operator === OPERATORS.EQUALS && <hr/>}
             <div className="calculator-row">
-                {operator && <span className="operator">{operator}</span>}
+                <Operator operator={operator} className="operator" />
 
                 {
                     operator === OPERATORS.EQUALS
@@ -87,39 +90,5 @@ const Container = styled.div`
         }
     }
 `
-
-function Operand({ label, name, value }) {
-    const { setOperand } = useCalculator()
-
-    function handleChange(event) {
-        setOperand(name, event.target.value)
-    }
-
-    return (
-        <div className="operand">
-            <label htmlFor={name}>{getLabel(label, value)}</label>
-            <input name={name} type="number" inputMode="decimal" value={value} onChange={handleChange} />
-        </div>
-    )
-}
-
-function Result({ label, name }) {
-    const { calculate, getRowsBeforeResult } = useCalculator()
-    const operands = getRowsBeforeResult(name).map(row => row.name)
-    const result = calculate(name)
-
-    return (
-        <div className="result">
-            <label htmlFor={name}>{getLabel(label, result)}</label>
-            <output name={name} htmlFor={operands.join(" ")}>{result}</output>
-        </div>
-    )
-}
-
-function getLabel(label, value) {
-    return typeof label === 'function'
-        ? label(value)
-        : label // does not use value
-}
 
 export default Row
