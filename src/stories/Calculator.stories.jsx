@@ -12,7 +12,7 @@ function Template(args) {
 
 export const Simple = Template.bind({})
 Simple.args = {
-    initialRows: [
+    rows: [
         {
             name: 'a',
             label: 'Initial value',
@@ -52,7 +52,7 @@ Simple.args = {
 
 export const MultiResults = Template.bind({})
 MultiResults.args = {
-    initialRows: [
+    rows: [
         {
             name: 'a',
             label: 'Initial value',
