@@ -17,8 +17,8 @@ function Row({ operator, ...rowProps }) {
 
                 {
                     operator === OPERATORS.EQUALS
-                        ? <Result {...rowProps} />
-                        : <Operand {...rowProps} />
+                        ? <Result className="result" {...rowProps} />
+                        : <Operand className="operand" {...rowProps} />
                 }
             </div>
         </Container>
@@ -51,42 +51,12 @@ const Container = styled.div`
 
         > .operator {
             position: absolute;
+
+            /* Account for font-size */
+            top: calc(50% - 1rem);
             left: 0;
 
             font-size: 1rem;
-
-            /* accounting for font-size */
-            top: calc(50% - 1rem);
-
-            color: black;
-        }
-
-        > .operand, > .result {
-            display: flex;
-            flex-basis: 100%;
-            flex-wrap: wrap;
-            column-gap: 1rem;
-
-            margin-left: 2rem; /* Space for operator */
-            margin-bottom: 1rem;
-
-            > label {
-                flex: 2;
-                color: black;
-                align-self: center;
-            }
-
-            > input, > output {
-                display: flex;
-                align-items: center;
-                margin: 0;
-                padding: 0;
-                padding-left: 1rem;
-
-                flex: 1;
-                border: 1px solid black;
-                height: 2rem;
-            }
         }
     }
 `

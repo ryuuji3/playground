@@ -1,10 +1,15 @@
 import React from 'react'
+import styled from 'styled-components'
 
 function Operator({ operator, ...otherProps }) {
     return (
-        <span {...otherProps}>{getOperator(operator)}</span>
+        <Container {...otherProps}>{getOperator(operator)}</Container>
     )
 }
+
+const Container = styled.span`
+    color: black;
+`
 
 function getOperator(operator) {
     switch (operator) {
