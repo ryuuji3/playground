@@ -7,18 +7,40 @@ import Result from './Result'
 import Operand from './Operand'
 import Operator from './Operator'
 
+import getLabel from './getLabel'
 
-function Row({ operator, ...rowProps }) {
+
+function Row({ name, label, operator, value, className, ...rowProps }) {
     return (
-        <Container>
+        <Container className={className}>
             {operator === OPERATORS.EQUALS && <hr/>}
             <div className="calculator-row">
-                <Operator operator={operator} className="operator" />
+                {
+                    operator
+                        ? <Operator operator={operator} className="operator" />
+                        : <span className="operator placeholder">&nbsp;</span>
+                }
+                
+
+                <label className="label" htmlFor={rowProps.name}>{getLabel(label, value)}</label>
 
                 {
                     operator === OPERATORS.EQUALS
-                        ? <Result className="result" {...rowProps} />
-                        : <Operand className="operand" {...rowProps} />
+                        ? (
+                            <Result 
+                                name={name}
+                                className="result" 
+                                {...rowProps} 
+                            />
+                        )
+                        : (
+                            <Operand 
+                                name={name}
+                                value={value}
+                                className="operand" 
+                                {...rowProps}
+                            />
+                        )
                 }
             </div>
         </Container>
@@ -40,24 +62,10 @@ const Container = styled.div`
     }
 
     > .calculator-row {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        display: grid;
 
         gap: 1rem;
-
-        /* For the operand */
-        position: relative;
-
-        > .operator {
-            position: absolute;
-
-            /* Account for font-size */
-            top: calc(50% - 1rem);
-            left: 0;
-
-            font-size: 1rem;
-        }
+        grid-template-columns: 2rem 1fr 1fr;
     }
 `
 

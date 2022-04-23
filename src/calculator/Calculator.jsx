@@ -12,7 +12,7 @@ export default function Calculator({
     initialRows = [],
 }) {
     const calculator = useCalculatorState(initialRows)
-    const calculatorRows = calculator.rows.map(row => (<Row {...row} key={row.name} />))
+    const calculatorRows = calculator.rows.map(row => (<Row {...row} key={row.name} className="row" />))
 
     return (
         <CalculatorContext.Provider value={calculator}>
@@ -24,8 +24,9 @@ export default function Calculator({
 }
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr;
+    row-gap: 1rem;
 
     margin: 0 auto;
     padding: 2rem 1rem;
@@ -34,5 +35,5 @@ const Container = styled.div`
     border-radius: 0.5rem;
     box-sizing: border-box; 
 
-    max-width: 80%;
+    max-width: 50%;
 `

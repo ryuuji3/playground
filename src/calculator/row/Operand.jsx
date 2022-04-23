@@ -3,8 +3,6 @@ import styled from 'styled-components'
 
 import { useCalculator } from '../hooks'
 
-import getLabel from './getLabel'
-
 
 function Operand({ label, name, value, ...otherProps }) {
     const { setOperand } = useCalculator()
@@ -14,38 +12,24 @@ function Operand({ label, name, value, ...otherProps }) {
     }
 
     return (
-        <Container {...otherProps}>
-            <label htmlFor={name}>{getLabel(label, value)}</label>
-            <input name={name} type="number" inputMode="decimal" value={value} onChange={handleChange} />
-        </Container>
+        <Input 
+            name={name} 
+            type="number" 
+            inputMode="decimal" 
+            value={value} 
+            onChange={handleChange} 
+            {...otherProps}
+        />
     )
 }
 
-const Container = styled.div`
-    display: flex;
-    flex-basis: 100%;
-    flex-wrap: wrap;
-    column-gap: 1rem;
+const Input = styled.input`
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem;
+    border: 1px solid black;
 
-    margin-left: 2rem; /* Space for operator */
-    margin-bottom: 1rem;
-
-    > label {
-        flex: 2;
-        color: black;
-        align-self: center;
-    }
-
-    > input {
-        flex: 1;
-
-        margin: 0;
-        padding: 0;
-        padding-left: 1rem;
-        border: 1px solid black;
-
-        height: 2rem;
-    }
+    height: 2rem;
 `
 
 export default Operand
