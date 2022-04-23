@@ -1,10 +1,11 @@
-import { useReducer } from 'react'
+import { useRecoilState } from 'recoil'
+import { Rows } from '../../atoms'
 
 import OPERATORS from '../definitions/Operators'
 
 
-function useCalculatorState(initialRows = []) {
-    const [ rows, dispatch ] = useReducer(reducer, initialRows)
+function useCalculatorState() {
+    const [ rows, setRows ] = useRecoilState(Rows)
 
     function getRowsBeforeResult(resultName) {
         const resultIndex = rows.findIndex(row => row.name === resultName)
@@ -19,7 +20,20 @@ function useCalculatorState(initialRows = []) {
 
     return {
         rows,
-        setOperand: (operand, value) => dispatch({ type: 'SET_OPERAND', operand, value }),
+        setValue: (name, value) => {
+            setRows(stateRows => {
+                return stateRows.map(row => {
+                    if (row.name === name) {
+                        return {
+                            ...row,
+                            value: value,
+                        }
+                    }
+
+                    return row
+                })
+            })
+        },
         calculate(upToOperand) {
             const [ firstRow, ...rows ] = getRowsBeforeResult(upToOperand)
 
@@ -50,27 +64,6 @@ function calculate(a, b, operator) {
             return parsedA / parsedB
         default:
             throw new Error(`Unknown operator ${operator}`)
-    }
-}
-
-function reducer(state, action) {
-    switch (action.type) {
-        case 'SET_OPERAND': {
-            const { operand, value } = action
-
-            return state.map(row => {
-                if (row.name === operand) {
-                    return {
-                        ...row,
-                        value: value,
-                    }
-                }
-
-                return row
-            })
-        }
-        default: 
-            return state;
     }
 }
 

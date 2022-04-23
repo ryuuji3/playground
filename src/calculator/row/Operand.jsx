@@ -1,14 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { useCalculator } from '../hooks'
 
-
-function Operand({ label, name, value, ...otherProps }) {
-    const { setOperand } = useCalculator()
-
+function Operand({ label, name, value, onChange, ...otherProps }) {
     function handleChange(event) {
-        setOperand(name, event.target.value)
+        onChange(event.target.value)
     }
 
     return (

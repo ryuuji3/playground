@@ -8,9 +8,12 @@ import Operand from './Operand'
 import Operator from './Operator'
 
 import getLabel from './getLabel'
+import useCalculatorState from '../hooks/useCalculatorState'
 
+function Row({ name, className, operator, label }) {
+    const { rows, calculate, getRowsBeforeResult, setValue } = useCalculatorState()
+    const row = rows.find(row => row.name === name)
 
-function Row({ name, label, operator, value, className, ...rowProps }) {
     return (
         <Container className={className}>
             {operator === OPERATORS.EQUALS && <hr/>}
@@ -20,25 +23,25 @@ function Row({ name, label, operator, value, className, ...rowProps }) {
                         ? <Operator operator={operator} className="operator" />
                         : <span className="operator placeholder">&nbsp;</span>
                 }
-                
 
-                <label className="label" htmlFor={rowProps.name}>{getLabel(label, value)}</label>
+                <label className="label" htmlFor={name}>{getLabel(label, row.value)}</label>
 
                 {
                     operator === OPERATORS.EQUALS
                         ? (
                             <Result 
                                 name={name}
-                                className="result" 
-                                {...rowProps} 
+                                className="result"
+                                operands={getRowsBeforeResult(name).map(row => row.name)}
+                                result={calculate(name)}
                             />
                         )
                         : (
                             <Operand 
                                 name={name}
-                                value={value}
-                                className="operand" 
-                                {...rowProps}
+                                value={row.value}
+                                className="operand"
+                                onChange={value => setValue(name, value)}
                             />
                         )
                 }

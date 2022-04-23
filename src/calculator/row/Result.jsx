@@ -1,18 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { useCalculator } from '../hooks'
 
-
-function Result({ label, name, ...otherProps }) {
-    const { calculate, getRowsBeforeResult } = useCalculator()
-    const operands = getRowsBeforeResult(name).map(row => row.name)
-    const result = calculate(name)
-
+function Result({ label, name, operands, result, ...otherProps }) {
     return (
         <Output 
             name={name} 
-            htmlFor={operands.join(" ")} 
+            htmlFor={operands.join(" ")}
             {...otherProps}
         >
             {result}
