@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 function Operand({ label, name, value, onChange, ...otherProps }) {
     function handleChange(event) {
+        console.log('Operand.handleChange')
         onChange(event.target.value)
     }
 

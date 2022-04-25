@@ -1,18 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useCalculatorResult } from '../hooks'
 
 
-function Result({ label, name, operands, result, ...otherProps }) {
+function Result({ label, name, ...otherProps }) {
+    const { result, precedingRowNames } = useCalculatorResult(name)
+
     return (
         <Output 
             name={name} 
-            htmlFor={operands.join(" ")}
+            htmlFor={precedingRowNames.join(" ")}
             {...otherProps}
         >
-            {result}
+            {Number.isNaN(result) ? null : result}
         </Output>
     )
 }
+
+
 
 const Output = styled.output`
     display: flex;

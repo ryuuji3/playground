@@ -1,2 +1,2 @@
-export { default as useCalculator } from './useCalculator'
-export { default as useCalculatorState } from './useCalculatorState'
+export { default as useCalculatorRow } from './useCalculatorRow'
+export { default as useCalculatorResult  } from './useCalculatorResult'

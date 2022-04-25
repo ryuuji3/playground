@@ -8,11 +8,16 @@ import Operand from './Operand'
 import Operator from './Operator'
 
 import getLabel from './getLabel'
-import useCalculatorState from '../hooks/useCalculatorState'
+import { useCalculatorRow } from '../hooks'
 
-function Row({ name, className, operator, label }) {
-    const { rows, calculate, getRowsBeforeResult, setValue } = useCalculatorState()
-    const row = rows.find(row => row.name === name)
+function Row({ name, className, operator, label, rows, initialValue, parent }) {
+    const { value, setValue } = useCalculatorRow(name, {
+        name,
+        value: initialValue,
+        operator,
+        rows,
+        parent,
+    })
 
     return (
         <Container className={className}>
@@ -24,26 +29,30 @@ function Row({ name, className, operator, label }) {
                         : <span className="operator placeholder">&nbsp;</span>
                 }
 
-                <label className="label" htmlFor={name}>{getLabel(label, row.value)}</label>
+                <label className="label" htmlFor={name}>{getLabel(label, value)}</label>
 
                 {
-                    operator === OPERATORS.EQUALS
+                    Array.isArray(rows)
                         ? (
-                            <Result 
-                                name={name}
-                                className="result"
-                                operands={getRowsBeforeResult(name).map(row => row.name)}
-                                result={calculate(name)}
-                            />
+                            <div className="calculator-row">
+                                {rows.map(row => (<Row key={row.name} initialValue={row.value} className="row" parent={name} {...row} />))}   
+                            </div>
                         )
-                        : (
-                            <Operand 
-                                name={name}
-                                value={row.value}
-                                className="operand"
-                                onChange={value => setValue(name, value)}
-                            />
-                        )
+                        : operator === OPERATORS.EQUALS
+                            ? (
+                                <Result
+                                    name={name}
+                                    className="result"
+                                />
+                            )
+                            : (
+                                <Operand 
+                                    name={name}
+                                    value={value}
+                                    className="operand"
+                                    onChange={setValue}
+                                />
+                            )
                 }
             </div>
         </Container>

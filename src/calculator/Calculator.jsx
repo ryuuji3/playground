@@ -3,17 +3,14 @@ import styled from 'styled-components'
 import { RecoilRoot } from 'recoil'
 
 import Row from './row'
-import { Rows } from '../atoms'
 
 export default function Calculator({
     rows = [],
 }) {
     return (
-        <RecoilRoot initializeState={({ set }) => {
-            set(Rows, rows)
-        }}>
+        <RecoilRoot>
             <Container>
-                {rows.map(row => (<Row key={row.name} className="row" {...row} />))}
+                {rows.map(row => (<Row key={row.name} initialValue={row.value} className="row" {...row} />))}
             </Container>
         </RecoilRoot>
     )

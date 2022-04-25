@@ -88,3 +88,53 @@ MultiResults.args = {
         },
     ],
 }
+
+export const GroupedRows = Template.bind({})
+GroupedRows.args = {
+    rows: [
+        {
+            name: 'a',
+            label: 'Initial value',
+            value: 5,
+        },
+        {
+            name: 'b',
+            label: 'Subtract',
+            operator: '-',
+            value: 2,
+        },
+        {
+            name: 'first-result',
+            label: 'First Result',
+            operator: '=',
+        },
+        {
+            name: 'c',
+            label: 'Multiply',
+            operator: '*',
+            rows: [
+                {
+                    name: 'c.a',
+                    label: 'Initial value',
+                    value: 7,
+                },
+                {
+                    name: 'c.b',
+                    label: 'Subtract',
+                    operator: '-',
+                    value: 2,
+                },
+                {
+                    name: 'result-embedded',
+                    label: 'Embedded result',
+                    operator: '=',
+                },
+            ],
+        },
+        {
+            name: 'result',
+            label: 'Result',
+            operator: '=',
+        },
+    ],
+}
