@@ -21,6 +21,8 @@ const Container = styled.div`
     border: 1px solid #A4B4BA;
     border-radius: 4px;
 
+    background-color: #ECF8F8;
+
     padding: 0.5rem;
 `
 

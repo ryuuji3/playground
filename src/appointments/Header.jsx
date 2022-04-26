@@ -21,7 +21,7 @@ const Container = styled.div`
     font-family: sans-serif;
     font-size: 12px;
 
-    background-color: rgba(0, 112, 160, 0.2);
+    background-color: #EEE4E1;
 `
 
 export default Header

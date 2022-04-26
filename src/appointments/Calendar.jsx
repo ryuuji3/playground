@@ -22,6 +22,7 @@ const Container = styled.div`
 
     grid-template-rows: min-content 1fr;
 
+    background-color: #ECF8F8;
     > .row {
         display: grid;
 
