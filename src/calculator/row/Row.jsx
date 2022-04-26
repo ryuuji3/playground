@@ -26,6 +26,7 @@ function Row({ name, className, operator, label, rows, initialValue, parent }) {
                 {
                     operator
                         ? <Operator operator={operator} className="operator" />
+                        // Preserve spacing
                         : <span className="operator placeholder">&nbsp;</span>
                 }
 
@@ -33,6 +34,7 @@ function Row({ name, className, operator, label, rows, initialValue, parent }) {
 
                 {
                     Array.isArray(rows)
+                        // Nested rows
                         ? (
                             <div className="calculator-row">
                                 {rows.map(row => (<Row key={row.name} initialValue={row.value} className="row" parent={name} {...row} />))}   

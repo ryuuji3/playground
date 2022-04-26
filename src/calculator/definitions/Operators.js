@@ -1,3 +1,4 @@
+// All supported operators
 const OPERATORS = {
     ADDITION: '+',
     SUBTRACTION: '-',

@@ -1,6 +1,6 @@
 import { atom, atomFamily } from "recoil";
 
-// Discovering all rows
+// So that we can find all rows regardless of their nesting 
 export const RowIds = atom({
     key: 'rowIds',
     default: [],

@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil'
 import { RowById } from '../selectors';
 
 
+// Used to register a row in the calculator
 function useCalculatorRow(name, initialRow) {
     if (!name) {
         throw new Error('[useCalculatorState] Name is required.')

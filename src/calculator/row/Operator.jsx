@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import OPERATORS from '../definitions/Operators'
 
 function Operator({ operator, ...otherProps }) {
     return (
@@ -13,15 +14,15 @@ const Container = styled.span`
 
 function getOperator(operator) {
     switch (operator) {
-        case '+':
+        case OPERATORS.ADDITION:
             return '+'
-        case '-':
+        case OPERATORS.SUBTRACTION:
             return '-'
-        case '*':
+        case OPERATORS.MULTIPLICATION:
             return '×'
-        case '/':
+        case OPERATORS.DIVISION:
             return '÷'
-        case '=':
+        case OPERATORS.EQUALS:
             return '='
         default:
             return operator

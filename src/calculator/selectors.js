@@ -2,6 +2,8 @@ import { selector, selectorFamily } from 'recoil'
 import { Row, RowIds } from './atoms';
 
 
+// Get: retrieve a row and its children by its name
+// Set: add a row, passing child rows as an array of names
 export const RowById = selectorFamily({
     key: "rowById",
     get(id) {
@@ -20,6 +22,7 @@ export const RowById = selectorFamily({
     }
 })
 
+// Get all rows in a single array, regardless of nesting
 export const FlatRows = selector({
     key: 'flatRows',
     get({ get }) {
@@ -29,6 +32,7 @@ export const FlatRows = selector({
     }
 })
 
+// Get fully populated top-level rows and their children
 export const NestedRows = selector({
     key: "nestedRows",
     get({ get }) {
@@ -39,6 +43,7 @@ export const NestedRows = selector({
     }
 })
 
+// Get all rows at the same level (ie. nested rows of the same parent, or other top-level rows)
 export const SiblingRows = selectorFamily({
     key: "siblingRows",
     get(id) {
