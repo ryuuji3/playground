@@ -20,14 +20,12 @@ function generateAvailability() {
     for (let day = 0; day < days; day++) {
         const date = dayjs.utc(today).set('day', day);
 
-        for (let hour = 0; hour < 24; hour += hourIncrements) {
+        for (let hour = 9; hour < 18; hour += hourIncrements) {
             availability.push(
                 date.set('hour', hour)
             );
         }
     }
 
-    return availability.map(
-        date => date.toISOString(),
-    )
+    return availability
 }

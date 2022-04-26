@@ -1,5 +1,4 @@
 import { selector } from "recoil";
-import dayjs from 'dayjs'
 
 import { Availability } from "./atoms";
 
@@ -8,17 +7,11 @@ export const Days = selector({
     get({ get }) {
         const availability = get(Availability);
 
-        return availability.reduce((days, isoDate) => {
-            const slot = dayjs(isoDate);
+        return availability.reduce((days, slot) => {
             const date = slot.get('date')
 
-            if (!days.find(day => day.date === date)) {
-                days.push({
-                    day: slot.get('day'),
-                    date,
-                    month: slot.get('month'),
-                    year: slot.get('year'),
-                });
+            if (!days.find(day => day.get('date') === date)) {
+                days.push(slot.startOf('day'));
             }
 
             return days;
@@ -32,17 +25,13 @@ export const SlotsByDays = selector({
         const availability = get(Availability);
         const days = get(Days);
 
-        return days.map(({ date, month, year }) => {
-            const day = dayjs(date)
-                .set('month', month)
-                .set('date', date)
-                .set('year', year)
-
-            return availability.filter(isoDate => {
-                const slot = dayjs(isoDate);
-
-                return slot.isSame(day, 'date')
-            })
+        return days.map(day => {
+            return {
+                day,
+                slots: availability.filter(slot => {
+                    return slot.isSame(day, 'date')
+                })
+            }
         })
     }
 })

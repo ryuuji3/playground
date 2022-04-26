@@ -10,14 +10,17 @@ function Header(props) {
 
     return (
         <Container {...props}>
-            {days.map(day => (
-                <Day key={day.date} day={day} />
+            {days.map((day, dayIndex) => (
+                <Day key={dayIndex} day={day} />
             ))}
         </Container>
     )
 }
 
 const Container = styled.div`
+    font-family: sans-serif;
+    font-size: 12px;
+
     background-color: rgba(0, 112, 160, 0.2);
 `
 

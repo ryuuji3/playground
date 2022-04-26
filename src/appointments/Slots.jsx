@@ -11,9 +11,9 @@ function Slots(props) {
 
     return (
         <Container {...props}>
-            {slotsByDay.map(day => (
-                <div className="column" key={day.date}>
-                    {day.map(slot => (<Slot key={slot} slot={slot} />))}
+            {slotsByDay.map(({ slots }, dayIndex) => (
+                <div className="column" key={dayIndex}>
+                    {slots.map((slot, slotIndex) => (<Slot key={slotIndex} slot={slot} />))}
                 </div>
             ))}
         </Container>
