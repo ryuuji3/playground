@@ -10,8 +10,8 @@ function Header(props) {
 
     return (
         <Container {...props}>
-            {days.map((day, dayIndex) => (
-                <Day key={dayIndex} day={day} />
+            {days.map(({ id, day }) => (
+                <Day key={id} day={day} />
             ))}
         </Container>
     )

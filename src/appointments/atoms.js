@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import { v4 as uuid } from 'uuid'
 
 dayjs.extend(utc)
 
@@ -23,7 +24,7 @@ function generateAvailability() {
         for (let hour = 9; hour < 18; hour += hourIncrements) {
             if (Math.random() > 0.5) {
                 availability.push(
-                    date.set('hour', hour)
+                    { id: uuid(), slot: date.set('hour', hour) }
                 );
             }
         }
@@ -31,3 +32,8 @@ function generateAvailability() {
 
     return availability
 }
+
+export const SelectedSlot = atom({
+    key: "SelectedSlot",
+    default: null,
+})
