@@ -21,9 +21,11 @@ function generateAvailability() {
         const date = dayjs.utc(today).set('day', day);
 
         for (let hour = 9; hour < 18; hour += hourIncrements) {
-            availability.push(
-                date.set('hour', hour)
-            );
+            if (Math.random() > 0.5) {
+                availability.push(
+                    date.set('hour', hour)
+                );
+            }
         }
     }
 
