@@ -47,9 +47,16 @@ const Container = styled.div`
 
     padding: 4px;
 
+    /* for animation */
+    transition: max-height 0.2s ease-in-out;
+    max-height: 40px;
+
     &.isSelected {
         border: 1px solid ${props => props.theme.colors.border};
         border-radius: 4px;
+        
+        /* for animation */
+        max-height: 90px;
     }
 
     > .flex-item {
