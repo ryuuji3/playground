@@ -21,7 +21,7 @@ const Container = styled.div`
     font-family: sans-serif;
     font-size: 12px;
 
-    background-color: #EEE4E1;
+    background-color: ${props => props.theme.colors.headerLight};
 `
 
 export default Header

@@ -32,10 +32,11 @@ const Time = styled.div`
     font-family: sans-serif;
     font-size: 12px;
 
-    border: 1px solid #A4B4BA;
-    border-radius: 4px;
+    background-color: ${props => props.theme.colors.buttonLight};
+    color: ${props => props.theme.colors.buttonLightText};
 
-    background-color: #ECF8F8;
+    border: 1px solid ${props => props.theme.colors.border};
+    border-radius: 4px;
 
     padding: 0.5rem;
 `
@@ -46,6 +47,9 @@ const Confirm = styled.button`
     text-align: center;
     font-family: sans-serif;
     font-size: 12px;
+
+    background-color: ${props => props.theme.colors.buttonDark};
+    color: ${props => props.theme.colors.buttonDarkText};
 
     margin: 0;
     padding: 0.5rem;

@@ -53,7 +53,7 @@ const Container = styled.span`
 
         & > .pill {
             padding: 2px 10px;
-            background-color: #E6BEAE;
+            background-color: ${props => props.theme.colors.headerDark};
             border-radius: 16px;
         }
     }

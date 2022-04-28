@@ -3,15 +3,18 @@ import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'
 import Header from './Header'
 import Slots from './Slots'
+import ThemeProvider from './ThemeProvider'
 
 
 function Calendar() {
     return (
         <RecoilRoot>
-            <Container>
-                <Header className="row" />
-                <Slots className="row" />
-            </Container>
+            <ThemeProvider>
+                <Container>
+                    <Header className="row" />
+                    <Slots className="row" />
+                </Container>
+            </ThemeProvider>
         </RecoilRoot>
     )
 }
@@ -22,7 +25,8 @@ const Container = styled.div`
 
     grid-template-rows: min-content 1fr;
 
-    background-color: #ECF8F8;
+    background-color: ${props => props.theme.colors.background};
+    
     > .row {
         display: grid;
 
