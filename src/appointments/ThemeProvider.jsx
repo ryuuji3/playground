@@ -15,6 +15,7 @@ const DEFAULT_THEME = {
         buttonLightText: 'black',
         buttonDark: '#304D6D',
         buttonDarkText: 'white',
+        buttonDarkHover: '#2C4663',
     },
 }
 

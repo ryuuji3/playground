@@ -85,6 +85,12 @@ const Container = styled.div`
 
         border: none;
         border-radius: 4px;
+
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: ${props => props.theme.colors.buttonDarkHover};
+        }
     }
 `
 
