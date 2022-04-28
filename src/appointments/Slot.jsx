@@ -2,6 +2,7 @@ import React from 'react'
 import dayjs from 'dayjs'
 import styled from 'styled-components'
 import { useRecoilState } from 'recoil'
+import classNames from 'classnames'
 
 import { SelectedSlot } from './selectors'
 
@@ -15,47 +16,69 @@ function Slot({ id, slot, onConfirm }) {
     }
 
     return (
-        // Using multiple top-level elements to make sure each element is part of flexbox
-        <>
-            <Time onClick={handleSlotClick}>
+        <Container className={classNames({ isSelected })}>
+            <div
+                className={classNames('time flex-item', { isSelected })}
+                onClick={handleSlotClick}
+            >
                 {date.format('HH:mm')}
-            </Time>
-            <div>
-                {isSelected && <Confirm onClick={onConfirm}>Confirm</Confirm>}
             </div>
-        </>
+            {isSelected && (
+                <button
+                    className="confirm-button flex-item"
+                    onClick={onConfirm}>
+                Confirm
+                </button>
+            )}
+        </Container>
     )
 }
 
-const Time = styled.div`
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    /* 8px gap to match the gap between the time slots */
+    /* plus padding of each slot */
+    row-gap: calc(8px + 2 * 4px);
+
     text-align: center;
     font-family: sans-serif;
     font-size: 12px;
 
-    background-color: ${props => props.theme.colors.buttonLight};
-    color: ${props => props.theme.colors.buttonLightText};
+    padding: 4px;
 
-    border: 1px solid ${props => props.theme.colors.border};
-    border-radius: 4px;
+    &.isSelected {
+        border: 1px solid ${props => props.theme.colors.border};
+        border-radius: 4px;
+    }
 
-    padding: 0.5rem;
-`
+    > .flex-item {
+        margin: 0;
+        padding: 0.5rem;
+    }
 
-const Confirm = styled.button`
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 12px;
+    > .time {
+        border: 1px solid ${props => props.theme.colors.border};
+        border-radius: 4px;
 
-    background-color: ${props => props.theme.colors.buttonDark};
-    color: ${props => props.theme.colors.buttonDarkText};
+        background-color: ${props => props.theme.colors.buttonLight};
+        color: ${props => props.theme.colors.buttonLightText};
 
-    margin: 0;
-    padding: 0.5rem;
+        &.isSelected {
+            color: ${props => props.theme.colors.buttonDark};
+        }
+    }
 
-    border: none;
-    border-radius: 8px;
+    > .confirm-button {
+        display: block;
+        width: 100%;
+
+        background-color: ${props => props.theme.colors.buttonDark};
+        color: ${props => props.theme.colors.buttonDarkText};
+
+        border: none;
+        border-radius: 4px;
+    }
 `
 
 export default Slot
