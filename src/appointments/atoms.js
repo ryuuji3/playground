@@ -18,7 +18,7 @@ function generateAvailability() {
 
     const availability = []
 
-    for (let day = -1; day < days; day++) {
+    for (let day = 0; day < days; day++) {
         const date = dayjs.utc(today).add(day, 'day');
 
         for (let hour = 9; hour < 18; hour += hourIncrements) {
