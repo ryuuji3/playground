@@ -3,8 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-function Day({ day }) {
-    return <Container>
+function Day({ day, className }) {
+    return <Container className={className}>
         <div className="day-indicator">
             <Pill day={day} />
         </div>
@@ -37,7 +37,6 @@ function Pill({ day }) {
 }
 
 const Container = styled.span`
-    padding: 1rem 1rem 0.5rem 1rem;
     text-align: center;
 
     position: relative;

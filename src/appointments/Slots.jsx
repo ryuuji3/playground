@@ -4,23 +4,31 @@ import styled from 'styled-components'
 
 import Slot from './Slot'
 import { DisplayedSlots } from './selectors'
+import Row from './Row'
 
 
 function Slots({ className }) {
     const slotsByDay = useRecoilValue(DisplayedSlots)
 
     return (
-        <Container className={className}>
-            {slotsByDay.map(({ id: dayId, slots }) => (
-                <div className="column" key={dayId}>
-                    {slots.map(({ id: slotId, slot }) => (<Slot key={slotId} slot={slot} id={slotId} />))}
-                </div>
-            ))}
-        </Container>
+        <Container 
+            className={className}
+            columns={slotsByDay.map(({ id: dayId, slots }) => ({
+                id: dayId,
+                children: (
+                    <div className="column">
+                        {slots.map(({ id: slotId, slot }) => (<Slot key={slotId} slot={slot} id={slotId} />))}
+                    </div>
+                ),
+            }))}
+            gutter={{
+                children: <span>&nbsp;</span>
+            }}
+        />
     )
 }
 
-const Container = styled.div`
+const Container = styled(Row)`
     > .column {
         display: flex;
         flex-direction: column;
