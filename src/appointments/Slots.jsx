@@ -3,14 +3,14 @@ import { useRecoilValue } from 'recoil'
 import styled from 'styled-components'
 
 import Slot from './Slot'
-import { SlotsByDays } from './selectors'
+import { DisplayedSlots } from './selectors'
 
 
-function Slots(props) {
-    const slotsByDay = useRecoilValue(SlotsByDays)
+function Slots({ className }) {
+    const slotsByDay = useRecoilValue(DisplayedSlots)
 
     return (
-        <Container {...props}>
+        <Container className={className}>
             {slotsByDay.map(({ id: dayId, slots }) => (
                 <div className="column" key={dayId}>
                     {slots.map(({ id: slotId, slot }) => (<Slot key={slotId} slot={slot} id={slotId} />))}

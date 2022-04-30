@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useRecoilValue } from 'recoil'
-import { Days } from './selectors'
+import { DisplayedDays } from './selectors'
 import Day from './Day'
 
 
 function Header(props) {
-    const days = useRecoilValue(Days)
+    const days = useRecoilValue(DisplayedDays)
 
     return (
         <Container {...props}>
