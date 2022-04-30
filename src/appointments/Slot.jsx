@@ -37,35 +37,48 @@ function Slot({ id, slot, onConfirm }) {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    /* 8px gap to match the gap between the time slots */
-    /* plus padding of each slot */
-    row-gap: calc(8px + 2 * 4px);
+
+    --row-gap: calc(8px + 4px * 2 + 1px * 2);
+    --padding: 4px;
+    --border: 1px;
+
+    /* 8px row-gap to match gap between slots */
+    /* padding of each flex-item (4px * 2) */
+    /* border of each item (1px * 2) */
+    row-gap: var(--row-gap);
 
     text-align: center;
     font-family: sans-serif;
     font-size: 12px;
 
-    padding: 4px;
+    padding: var(--padding);
 
     /* for animation */
     transition: max-height 0.2s ease-in-out;
-    max-height: 40px;
+    max-height: 50px;
+
+    box-sizing: border-box;
+    border: var(--border) solid transparent; /* consistent sizing */
 
     &.isSelected {
         border: 1px solid ${props => props.theme.colors.border};
         border-radius: 4px;
         
         /* for animation */
-        max-height: 90px;
+        /* each flex-item (16px line-height + 12px vertical padding) */
+        /* padding of container (4px * 2) */
+        /* row-gap */
+        /* border of container (1px * 2) */
+        max-height: calc((16px + 12px * 2) * 2 + (var(--padding) * 2) + var(--row-gap) + (var(--border) * 2));
     }
 
     > .flex-item {
         margin: 0;
-        padding: 0.5rem;
+        padding: 12px 32px;
     }
 
     > .time {
-        border: 1px solid ${props => props.theme.colors.border};
+        border: var(--border) solid ${props => props.theme.colors.border};
         border-radius: 4px;
 
         background-color: ${props => props.theme.colors.buttonLight};
@@ -87,6 +100,9 @@ const Container = styled.div`
         border-radius: 4px;
 
         transition: background-color 0.2s ease-in-out;
+
+        font-size: 12px;
+        line-height: 16px;
 
         &:hover {
             background-color: ${props => props.theme.colors.buttonDarkHover};
