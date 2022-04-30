@@ -1,21 +1,15 @@
 import React from 'react'
-import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'
 import Header from './Header'
 import Slots from './Slots'
-import ThemeProvider from './ThemeProvider'
 
 
 function Calendar() {
     return (
-        <RecoilRoot>
-            <ThemeProvider>
-                <Container>
-                    <Header className="row" />
-                    <Slots className="row" />
-                </Container>
-            </ThemeProvider>
-        </RecoilRoot>
+        <Container>
+            <Header className="row" />
+            <Slots className="row" />
+        </Container>
     )
 }
 

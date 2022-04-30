@@ -1,2 +1,2 @@
 export { default as Calculator } from './calculator'
-export { Calendar } from './appointments'
+export { default as AppointmentApp } from './appointments'
