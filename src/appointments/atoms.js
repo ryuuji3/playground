@@ -18,8 +18,12 @@ function generateAvailability() {
 
     const availability = []
 
-    for (let day = 0; day < days; day++) {
+    for (let day = 0, generatedDays = 0; generatedDays < days; day++) {
         const date = dayjs.utc(today).add(day, 'day');
+
+        if (date.get('day') === 0 || date.get('day') === 6) {
+            continue; // skip weekends
+        }
 
         for (let hour = 9; hour < 18; hour += hourIncrements) {
             if (Math.random() > 0.5) {
@@ -28,6 +32,8 @@ function generateAvailability() {
                 );
             }
         }
+
+        generatedDays++;
     }
 
     return availability
