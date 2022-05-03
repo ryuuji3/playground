@@ -21,7 +21,6 @@ function Row({ name, className, operator, label, rows, initialValue, parent }) {
 
     return (
         <Container className={className}>
-            {operator === OPERATORS.EQUALS && <hr/>}
             <div className="calculator-row">
                 {
                     operator
@@ -62,24 +61,8 @@ function Row({ name, className, operator, label, rows, initialValue, parent }) {
 }
 
 const Container = styled.div`
-    > hr {
-        display: block;
-
-        width: 100%;
-        height: 1px;
-
-        border: 0;
-
-        margin: 0.1rem 0 1rem;
-
-        background-color: black;
-    }
-
     > .calculator-row {
-        display: grid;
-
-        gap: 1rem;
-        grid-template-columns: 2rem 1fr 1fr;
+        display: contents;
     }
 `
 

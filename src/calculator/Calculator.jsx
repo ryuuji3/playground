@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { RecoilRoot } from 'recoil'
 
 import Row from './row'
+import OPERATORS from './definitions/Operators'
 
 export default function Calculator({
     rows = [],
@@ -10,7 +11,12 @@ export default function Calculator({
     return (
         <RecoilRoot>
             <Container>
-                {rows.map(row => (<Row key={row.name} initialValue={row.value} className="row" {...row} />))}
+                {rows.map(row => (
+                    <Fragment key={row.name}>
+                        {row.operator === OPERATORS.EQUALS && <hr />}
+                        <Row initialValue={row.value} className="row" {...row} />
+                    </Fragment>
+                ))}
             </Container>
         </RecoilRoot>
     )
@@ -19,14 +25,31 @@ export default function Calculator({
 const Container = styled.div`
     display: grid;
     grid-template-rows: 1fr;
-    row-gap: 1rem;
+    grid: [row-start] 1fr [row-end] / 
+        [operator] min-content 
+        [label] 1fr 
+        [number] 1fr;
+    gap: 1rem;
+
+    > .row {
+        display: contents;
+    }
+
+    > hr {
+        border: 1px solid black;
+        width: 100%;
+        grid-column: span 3;
+    }
 
     margin: 0 auto;
     padding: 2rem 1rem;
 
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 
-    max-width: 50%;
+    /* Predictable sizing algorithm */
+    * {
+        box-sizing: inherit;
+    }
 `
