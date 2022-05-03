@@ -1,4 +1,4 @@
-import { AppointmentApp } from '..'
+import { AppointmentApp } from '../..'
 
 
 export default {
