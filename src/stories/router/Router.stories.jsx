@@ -1,4 +1,4 @@
-import { Router } from "../../";
+import { Router, Route } from "../../";
 
 export default {
     title: 'Router',
@@ -8,7 +8,14 @@ export default {
 export function Basic() {
     return (
         <Router>
-            <div>Hello world</div>
+            <div>
+                <Route name="a" path="/a">
+                    a
+                </Route>
+                <Route name="b" path="/b">
+                    b
+                </Route>
+            </div>
         </Router>
     )
 }
