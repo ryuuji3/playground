@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react'
 
+
 export const RouterContext = createContext()
 
-
-export function useRouter() {
+export default function useRouter() {
     const context = useContext(RouterContext)
 
     if (!context) {

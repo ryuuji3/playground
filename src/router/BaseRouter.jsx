@@ -1,7 +1,26 @@
-import { useReducer } from "react";
+import React, { useReducer } from 'react'
 import produce from 'immer'
 
+import useNavigation from "./useNavigation";
+
+import { RouterContext } from './useRouter'
+
+
+function BaseRouter({ children, basePath, routes }) {
+    const router = useRouterState({
+        basePath,
+        routes,
+    })
+
+    return (
+        <RouterContext.Provider value={router}>
+            {children}
+        </RouterContext.Provider>
+    )
+}
+
 function useRouterState({ basePath = "/", routes = [] }) {
+    const navigation = useNavigation()
     const [ router, dispatch ] = useReducer(reducer, {
         basePath,
         routes,
@@ -33,8 +52,8 @@ function useRouterState({ basePath = "/", routes = [] }) {
                 })
             }
         },
-        isRouteActive(route) {
-            return false // TODO: Implement this
+        isRouteActive({ path }) {
+            return navigation.currentLocation.pathname === path
         },
     }
 }
@@ -59,4 +78,4 @@ const ACTIONS = {
     REMOVE_ROUTE: "REMOVE_ROUTE",
 }
 
-export default useRouterState
+export default BaseRouter

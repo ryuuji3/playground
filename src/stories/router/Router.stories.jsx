@@ -1,10 +1,10 @@
-import { Router, Route } from "../../";
+import { MemoryRouter, Route } from "../../";
 
 import Browser from "./browser";
 
 export default {
     title: 'Router',
-    component: Router,
+    component: MemoryRouter,
     args: {
         path: '/',
     }
@@ -13,8 +13,11 @@ export default {
 export function Basic(args) {
     return (
         <Browser {...args}>
-            <Router>
+            <MemoryRouter>
                 <div>
+                    <Route name="a">
+                        Home route
+                    </Route>
                     <Route name="a" path="/a">
                         a
                     </Route>
@@ -22,7 +25,7 @@ export function Basic(args) {
                         b
                     </Route>
                 </div>
-            </Router>
+            </MemoryRouter>
         </Browser>
     )
 }

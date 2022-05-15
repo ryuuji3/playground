@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react'
 
-import { useRouter } from "./Router";
+import useRouter from "./useRouter";
 
 
 export default function useRoute({ name, path }) {
