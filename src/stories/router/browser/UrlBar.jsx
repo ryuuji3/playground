@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import { Path } from './atoms'
+import { Router } from '../../..'
 
 
 function UrlBar({ initialPath, className }) {
-    const [ path, setPath ] = useRecoilState(Path)
+    const [ path, setPath ] = useState(initialPath)
+    const navigation = Router.useNavigation()
 
-    // Update atom from initialPath
-    useEffect(() => {
-        setPath(initialPath)
-    }, [ initialPath, setPath ])
-
-    function onChange({ target }) {
+    function handlePathChange({ target }) {
         setPath(
             target.value.startsWith('/')
             ? target.value
@@ -21,12 +15,16 @@ function UrlBar({ initialPath, className }) {
         )
     }
 
+    function handleUpdateUrlClick() {
+        navigation.push(path)
+    }
+
     return (
         <Container className={className}>
             <span className="spacer">&nbsp;</span>
             <div className="input-bar">
-                <input type="text" value={path} onChange={onChange} className="input" />
-                <button type="button" className="button">Update Url</button>
+                <input type="text" value={path} onChange={handlePathChange} className="input" />
+                <button type="button" className="button" onClick={handleUpdateUrlClick}>Update Url</button>
             </div>
             <span className="spacer">&nbsp;</span>
         </Container>

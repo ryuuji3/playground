@@ -52,7 +52,14 @@ function useRouterState({ basePath = "/", routes = [] }) {
                 })
             }
         },
-        isRouteActive({ path }) {
+        isRouteActive({ path, unmatched }) {
+            // Unmatched route will only be active if there is no active route
+            if (unmatched) {
+                return router.routes
+                    .filter(route => route.unmatched !== true) // Prevent infinite loop
+                    .some(this.isRouteActive) === false
+            }
+
             return navigation.currentLocation.pathname === path
         },
     }

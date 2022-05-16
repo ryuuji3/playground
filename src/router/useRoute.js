@@ -3,7 +3,7 @@ import { useEffect, useReducer } from 'react'
 import useRouter from "./useRouter";
 
 
-export default function useRoute({ name, path }) {
+export default function useRoute({ name, path, unmatched }) {
     const router = useRouter()
 
     if (!router) {
@@ -13,7 +13,10 @@ export default function useRoute({ name, path }) {
     const [ route ] = useReducer(reducer, {
         router,
         name,
-        path: path ?? router.basePath,
+        path: unmatched 
+            ? null
+            : path ?? router.basePath,
+        unmatched,
     })
 
     // Register/unregister our route with the router
